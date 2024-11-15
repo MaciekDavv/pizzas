@@ -10,6 +10,10 @@ set(SRC_LIST
     src/Pizza.cpp
     src/Pizzeria.cpp)
 
+set(SRC_TEST_LIST
+    test/PizzeriaTest.cpp
+    test/test_main.cpp)
+
 include(FetchContent)
 FetchContent_Declare(
   googletest
@@ -27,11 +31,10 @@ add_executable(${PROJECT_NAME} src/main.cpp)
 target_link_libraries(${PROJECT_NAME} ${PROJECT_NAME}-lib pthread)
 
 link_libraries(gmock)
-add_executable(${PROJECT_NAME}-ut test/PizzeriaTest.cpp test/test_main.cpp)
+add_executable(${PROJECT_NAME}-ut ${SRC_TEST_LIST})
 target_link_libraries(${PROJECT_NAME}-ut ${PROJECT_NAME}-lib)
 
 enable_testing()
 
 include(GoogleTest)
 gtest_discover_tests(${PROJECT_NAME}-ut)
-
